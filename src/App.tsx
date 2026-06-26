@@ -4,7 +4,7 @@ import { Toaster as Sonner } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import Index from './pages/Index'
 import NotFound from './pages/NotFound'
-import Layout from './components/Layout'
+import { Layout } from './components/Layout'
 
 const App = () => (
   <BrowserRouter>
@@ -13,7 +13,7 @@ const App = () => (
       <Sonner />
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Index />} />
+          <Route index element={<Index />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
