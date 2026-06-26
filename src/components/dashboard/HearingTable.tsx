@@ -31,7 +31,7 @@ function InlineInput({
 
   if (type === 'date') {
     return (
-      <div className="flex items-center gap-1">
+      <div className="w-full">
         <Input
           type="date"
           value={val}
@@ -42,21 +42,21 @@ function InlineInput({
               onChange(newValue)
             }
           }}
-          className="h-8 flex-1 min-w-0 border border-[#e2e8f0] bg-white rounded-md px-2 py-1.5 text-[14px]"
+          className="h-9 w-full border border-[#e2e8f0] bg-white rounded-md px-2 py-1.5 text-[14px]"
         />
         {value && (
           <Button
             variant="ghost"
-            size="icon"
             onClick={() => {
               setVal('')
               onChange('')
             }}
-            className="h-8 w-8 text-slate-400 hover:text-red-600 flex-shrink-0"
+            className="mt-1.5 h-auto w-full flex items-center justify-center gap-1 text-xs text-slate-500 hover:text-red-600 py-1.5 rounded-md border border-[#eceff4]"
             title="Limpar data"
             type="button"
           >
-            <X className="h-4 w-4" />
+            <X className="h-3.5 w-3.5" />
+            Limpar data
           </Button>
         )}
       </div>
