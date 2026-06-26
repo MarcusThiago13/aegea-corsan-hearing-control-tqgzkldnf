@@ -58,11 +58,7 @@ ${territorial.map(formatLine).join('\n') || 'Nenhuma registrada.'}
 *Reuniões:*
 ${meetings.map(formatLine).join('\n') || 'Nenhuma registrada.'}
 
-*Resumo:*
-✅ Realizadas: ${stats['Realizada'] || 0}
-📅 Agendadas: ${stats['Agendada'] || 0}
-🟡 A agendar: ${stats['A agendar'] || 0}
-🟣 A definir: ${stats['A definir'] || 0}`
+*Resumo:* ✅ ${stats['Realizada'] || 0} realizadas · 📅 ${stats['Agendada'] || 0} agendadas · 🟡 ${stats['A agendar'] || 0} a agendar · 🟣 ${stats['A definir'] || 0} a definir`
   }, [hearings])
 
   const handleCopy = async () => {

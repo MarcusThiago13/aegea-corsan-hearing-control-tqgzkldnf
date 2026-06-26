@@ -13,9 +13,6 @@ export default function Layout() {
       <header className="bg-gradient-to-r from-[#1e5631] to-[#143d22] text-white print-hidden shadow-md">
         <div className="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-green-200 mb-1">
-              Assembleia Legislativa do RS
-            </p>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight">
               Comissão Especial de Fiscalização da AEGEA/CORSAN
             </h1>
