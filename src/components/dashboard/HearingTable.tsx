@@ -45,25 +45,55 @@ function InlineInput({
 interface Props {
   title: string
   type: HearingType
+  themeColor?: 'blue' | 'sky' | 'red'
   data: Hearing[]
   onAdd: (type: HearingType) => void
   onUpdate: (id: string, data: Partial<Hearing>) => void
   onDelete: (id: string) => void
 }
 
-export function HearingTable({ title, type, data, onAdd, onUpdate, onDelete }: Props) {
+export function HearingTable({
+  title,
+  type,
+  themeColor = 'blue',
+  data,
+  onAdd,
+  onUpdate,
+  onDelete,
+}: Props) {
+  const themes = {
+    blue: {
+      titleBorder: 'border-blue-700',
+      rowBorder: 'border-l-blue-700',
+    },
+    sky: {
+      titleBorder: 'border-sky-600',
+      rowBorder: 'border-l-sky-600',
+    },
+    red: {
+      titleBorder: 'border-red-600',
+      rowBorder: 'border-l-red-600',
+    },
+  }
+  const theme = themes[themeColor]
+
   return (
     <div className="mb-8 print:mb-4">
       <div className="flex items-center justify-between mb-3 print:hidden">
-        <h2 className="text-lg font-bold text-slate-800 border-b-2 border-primary pb-1 inline-block">
+        <h2
+          className={cn(
+            'text-lg font-bold text-slate-800 border-b-2 pb-1 inline-block',
+            theme.titleBorder,
+          )}
+        >
           {title}
         </h2>
       </div>
       <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm print:border-slate-300 print:shadow-none print:rounded-none print:border">
         <div className="overflow-x-auto">
           <Table>
-            <TableHeader className="bg-[#1e5631] print:bg-transparent print:border-b-2 print:border-black">
-              <TableRow className="hover:bg-[#1e5631] print:hover:bg-transparent">
+            <TableHeader className="bg-blue-700 print:bg-transparent print:border-b-2 print:border-black">
+              <TableRow className="hover:bg-blue-700 print:hover:bg-transparent border-b-0">
                 <TableHead className="text-white print:text-black font-bold">
                   {type === 'meeting'
                     ? 'Reunião como convidada no tema AEGEA/CORSAN'
@@ -86,9 +116,8 @@ export function HearingTable({ title, type, data, onAdd, onUpdate, onDelete }: P
                     key={h.id}
                     className={cn(
                       'group transition-colors print:border-b print:border-slate-300',
-                      type === 'meeting'
-                        ? 'bg-yellow-200/50 hover:bg-yellow-200/70 print:bg-transparent'
-                        : '',
+                      'even:bg-slate-50',
+                      `border-l-[3px] ${theme.rowBorder}`,
                     )}
                   >
                     <TableCell className="py-1 border-r border-slate-200/50 print:border-slate-300 print:py-2">
@@ -150,7 +179,7 @@ export function HearingTable({ title, type, data, onAdd, onUpdate, onDelete }: P
             variant="ghost"
             size="sm"
             onClick={() => onAdd(type)}
-            className="text-[#1e5631] hover:text-[#143d22] hover:bg-[#1e5631]/10"
+            className="text-blue-700 hover:text-blue-800 hover:bg-blue-700/10"
           >
             <Plus className="h-4 w-4 mr-1" /> Adicionar Linha
           </Button>

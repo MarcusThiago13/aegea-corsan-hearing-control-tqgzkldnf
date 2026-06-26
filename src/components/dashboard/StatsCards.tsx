@@ -15,40 +15,40 @@ export function StatsCards({ hearings }: { hearings: Hearing[] }) {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 print:hidden">
-      <Card className="border-l-4 border-l-green-600">
+      <Card className="bg-white border-[#e7ecf3] rounded-xl border-t-[3px] border-t-green-600 shadow-sm">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium text-slate-600">Realizadas</CardTitle>
           <CheckCircle2 className="h-4 w-4 text-green-600" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats['Realizada']}</div>
+          <div className="text-2xl font-bold text-green-600">{stats['Realizada']}</div>
         </CardContent>
       </Card>
-      <Card className="border-l-4 border-l-blue-600">
+      <Card className="bg-white border-[#e7ecf3] rounded-xl border-t-[3px] border-t-blue-700 shadow-sm">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium text-slate-600">Agendadas</CardTitle>
-          <CalendarDays className="h-4 w-4 text-blue-600" />
+          <CalendarDays className="h-4 w-4 text-blue-700" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats['Agendada']}</div>
+          <div className="text-2xl font-bold text-blue-700">{stats['Agendada']}</div>
         </CardContent>
       </Card>
-      <Card className="border-l-4 border-l-amber-500">
+      <Card className="bg-white border-[#e7ecf3] rounded-xl border-t-[3px] border-t-amber-600 shadow-sm">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium text-slate-600">A agendar</CardTitle>
-          <Clock className="h-4 w-4 text-amber-500" />
+          <Clock className="h-4 w-4 text-amber-600" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats['A agendar']}</div>
+          <div className="text-2xl font-bold text-amber-600">{stats['A agendar']}</div>
         </CardContent>
       </Card>
-      <Card className="border-l-4 border-l-purple-600">
+      <Card className="bg-white border-[#e7ecf3] rounded-xl border-t-[3px] border-t-red-600 shadow-sm">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium text-slate-600">A definir</CardTitle>
-          <HelpCircle className="h-4 w-4 text-purple-600" />
+          <HelpCircle className="h-4 w-4 text-red-600" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stats['A definir']}</div>
+          <div className="text-2xl font-bold text-red-600">{stats['A definir']}</div>
         </CardContent>
       </Card>
     </div>
