@@ -76,8 +76,10 @@ export function HearingTable({
           {data.length}
         </div>
       </div>
-      <div className="bg-white rounded-2xl border border-[#eceff4] overflow-hidden shadow-sm print:border-slate-300 print:shadow-none print:rounded-none print:border">
-        <div className="overflow-x-auto">
+
+      <div className="md:bg-white md:rounded-2xl md:border md:border-[#eceff4] md:overflow-hidden md:shadow-sm print:border-slate-300 print:shadow-none print:rounded-none print:border">
+        {/* Desktop View */}
+        <div className="hidden md:block overflow-x-auto print:block">
           <Table>
             <TableHeader className="bg-transparent print:border-b-2 print:border-black">
               <TableRow className="hover:bg-transparent border-b border-[#eceff4]">
@@ -164,7 +166,81 @@ export function HearingTable({
             </TableBody>
           </Table>
         </div>
-        <div className="p-3 border-t border-[#eceff4] bg-white print:hidden">
+
+        {/* Mobile View */}
+        <div className="md:hidden space-y-2.5 print:hidden">
+          {data.map((h) => {
+            const status = getStatus(h.date, h.type)
+            return (
+              <div
+                key={h.id}
+                className="bg-white border border-[#eceff4] rounded-xl p-3.5 pl-4 relative border-l-[3px] shadow-sm"
+                style={{ borderLeftColor: themeColor }}
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-2 right-2 h-8 w-8 text-slate-400 hover:text-red-600"
+                  onClick={() => onDelete(h.id)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+
+                <div className="pr-8">
+                  <div className="text-[11px] uppercase tracking-wide text-[#94a3b8] font-semibold mb-1">
+                    {type === 'meeting'
+                      ? 'Reunião como convidada no tema AEGEA/CORSAN'
+                      : type === 'visit'
+                        ? 'Unidade / Local da visita'
+                        : 'Audiência / Cidade-sede'}
+                  </div>
+                  <div className="-ml-2">
+                    <InlineInput
+                      value={h.local}
+                      onChange={(v) => onUpdate(h.id, { local: v })}
+                      placeholder="Digite o local/tema"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 mt-3">
+                  <div>
+                    <div className="text-[11px] uppercase tracking-wide text-[#94a3b8] font-semibold mb-1">
+                      Data
+                    </div>
+                    <div className="-ml-2">
+                      <InlineInput
+                        type="date"
+                        value={toInputDate(h.date)}
+                        onChange={(v) => onUpdate(h.id, { date: fromInputDate(v) })}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[11px] uppercase tracking-wide text-[#94a3b8] font-semibold mb-1">
+                      Status
+                    </div>
+                    <div className="pt-1">
+                      <Badge
+                        variant="outline"
+                        className={cn('font-medium whitespace-nowrap', getStatusColor(status))}
+                      >
+                        {status}
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+          {data.length === 0 && (
+            <div className="text-center py-8 text-slate-500 bg-white border border-[#eceff4] rounded-xl">
+              Nenhum registro encontrado.
+            </div>
+          )}
+        </div>
+
+        <div className="pt-2 pb-1 md:p-3 md:border-t md:border-[#eceff4] md:bg-white print:hidden">
           <Button
             variant="ghost"
             size="sm"
