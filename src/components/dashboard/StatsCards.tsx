@@ -14,7 +14,7 @@ export function StatsCards({ hearings }: { hearings: Hearing[] }) {
   )
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 print-hidden">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 print:hidden">
       <Card className="border-l-4 border-l-green-600">
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium text-slate-600">Realizadas</CardTitle>

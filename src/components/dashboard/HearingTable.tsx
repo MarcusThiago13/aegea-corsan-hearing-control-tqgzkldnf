@@ -68,7 +68,7 @@ export function HearingTable({ title, type, data, onAdd, onUpdate, onDelete }: P
                 <TableHead>Local / Tema</TableHead>
                 <TableHead className="w-[180px]">Data</TableHead>
                 <TableHead className="w-[140px]">Status</TableHead>
-                <TableHead className="w-[60px] text-right print-hidden"></TableHead>
+                <TableHead className="w-[60px] text-right print:hidden"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -77,21 +77,27 @@ export function HearingTable({ title, type, data, onAdd, onUpdate, onDelete }: P
                 return (
                   <TableRow key={h.id} className="group transition-colors">
                     <TableCell className="py-2">
-                      <InlineInput
-                        value={h.num}
-                        onChange={(v) => onUpdate(h.id, { num: v })}
-                        placeholder="01"
-                      />
+                      <div className="print:hidden">
+                        <InlineInput
+                          value={h.num}
+                          onChange={(v) => onUpdate(h.id, { num: v })}
+                          placeholder="01"
+                        />
+                      </div>
+                      <div className="hidden print:block px-2">{h.num || '-'}</div>
                     </TableCell>
                     <TableCell className="py-2">
-                      <InlineInput
-                        value={h.local}
-                        onChange={(v) => onUpdate(h.id, { local: v })}
-                        placeholder="Digite o local/tema"
-                      />
+                      <div className="print:hidden">
+                        <InlineInput
+                          value={h.local}
+                          onChange={(v) => onUpdate(h.id, { local: v })}
+                          placeholder="Digite o local/tema"
+                        />
+                      </div>
+                      <div className="hidden print:block px-2">{h.local || '-'}</div>
                     </TableCell>
                     <TableCell className="py-2">
-                      <div className="print-hidden">
+                      <div className="print:hidden">
                         <InlineInput
                           type="date"
                           value={toInputDate(h.date)}
@@ -108,7 +114,7 @@ export function HearingTable({ title, type, data, onAdd, onUpdate, onDelete }: P
                         {status}
                       </Badge>
                     </TableCell>
-                    <TableCell className="py-2 text-right print-hidden">
+                    <TableCell className="py-2 text-right print:hidden">
                       <Button
                         variant="ghost"
                         size="icon"
@@ -131,7 +137,7 @@ export function HearingTable({ title, type, data, onAdd, onUpdate, onDelete }: P
             </TableBody>
           </Table>
         </div>
-        <div className="p-2 border-t border-slate-100 bg-slate-50 print-hidden">
+        <div className="p-2 border-t border-slate-100 bg-slate-50 print:hidden">
           <Button
             variant="ghost"
             size="sm"

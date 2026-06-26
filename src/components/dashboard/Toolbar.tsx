@@ -54,7 +54,7 @@ export function Toolbar({ hearings, onReload }: { hearings: Hearing[]; onReload:
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-2 mb-6 p-3 bg-white rounded-lg border border-slate-200 shadow-sm print-hidden">
+    <div className="flex flex-wrap items-center gap-2 mb-6 p-3 bg-white rounded-lg border border-slate-200 shadow-sm print:hidden">
       <Button
         variant="default"
         className="bg-[#1e5631] hover:bg-[#143d22]"
@@ -72,10 +72,10 @@ export function Toolbar({ hearings, onReload }: { hearings: Hearing[]; onReload:
         onClick={() => fileInputRef.current?.click()}
         className="text-slate-600"
       >
-        <Upload className="w-4 h-4 mr-2" /> Importar
+        <Upload className="w-4 h-4 mr-2" /> Importar arquivo
       </Button>
       <Button variant="ghost" size="sm" onClick={handleExport} className="text-slate-600">
-        <Download className="w-4 h-4 mr-2" /> Exportar
+        <Download className="w-4 h-4 mr-2" /> Backup em arquivo
       </Button>
       <input
         type="file"
