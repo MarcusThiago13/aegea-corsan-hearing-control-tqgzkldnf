@@ -14,13 +14,13 @@ export function getStatus(dateStr: string | undefined, type: HearingType): Statu
 export function getStatusColor(status: Status) {
   switch (status) {
     case 'Realizada':
-      return 'bg-green-100 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400'
+      return 'bg-[#ecfdf3] text-[#15803d] border-transparent before:content-[""] before:inline-block before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#15803d] before:mr-1.5 inline-flex items-center rounded-full px-2.5 py-0.5'
     case 'Agendada':
-      return 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400'
+      return 'bg-[#eff4ff] text-[#1d4ed8] border-transparent before:content-[""] before:inline-block before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#1d4ed8] before:mr-1.5 inline-flex items-center rounded-full px-2.5 py-0.5'
     case 'A agendar':
-      return 'bg-amber-100 text-amber-600 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400'
+      return 'bg-[#fff7ec] text-[#b45309] border-transparent before:content-[""] before:inline-block before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#b45309] before:mr-1.5 inline-flex items-center rounded-full px-2.5 py-0.5'
     case 'A definir':
-      return 'bg-red-100 text-red-600 border-red-200 dark:bg-red-900/30 dark:text-red-400'
+      return 'bg-[#fef2f2] text-[#dc2626] border-transparent before:content-[""] before:inline-block before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#dc2626] before:mr-1.5 inline-flex items-center rounded-full px-2.5 py-0.5'
   }
 }
 

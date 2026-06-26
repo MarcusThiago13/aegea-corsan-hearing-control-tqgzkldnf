@@ -45,7 +45,7 @@ function InlineInput({
 interface Props {
   title: string
   type: HearingType
-  themeColor?: 'blue' | 'sky' | 'red'
+  themeColor?: string
   data: Hearing[]
   onAdd: (type: HearingType) => void
   onUpdate: (id: string, data: Partial<Hearing>) => void
@@ -55,57 +55,38 @@ interface Props {
 export function HearingTable({
   title,
   type,
-  themeColor = 'blue',
+  themeColor = '#0e7490',
   data,
   onAdd,
   onUpdate,
   onDelete,
 }: Props) {
-  const themes = {
-    blue: {
-      titleBorder: 'border-blue-700',
-      rowBorder: 'border-l-blue-700',
-    },
-    sky: {
-      titleBorder: 'border-sky-600',
-      rowBorder: 'border-l-sky-600',
-    },
-    red: {
-      titleBorder: 'border-red-600',
-      rowBorder: 'border-l-red-600',
-    },
-  }
-  const theme = themes[themeColor]
-
   return (
     <div className="mb-8 print:mb-4">
-      <div className="flex items-center justify-between mb-3 print:hidden">
-        <h2
-          className={cn(
-            'text-lg font-bold text-slate-800 border-b-2 pb-1 inline-block',
-            theme.titleBorder,
-          )}
-        >
-          {title}
-        </h2>
+      <div className="flex items-center gap-3 mb-4 print:hidden">
+        <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: themeColor }} />
+        <h2 className="text-lg font-semibold text-slate-800">{title}</h2>
+        <div className="bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full text-xs font-medium">
+          {data.length}
+        </div>
       </div>
-      <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm print:border-slate-300 print:shadow-none print:rounded-none print:border">
+      <div className="bg-white rounded-2xl border border-[#eceff4] overflow-hidden shadow-sm print:border-slate-300 print:shadow-none print:rounded-none print:border">
         <div className="overflow-x-auto">
           <Table>
-            <TableHeader className="bg-blue-700 print:bg-transparent print:border-b-2 print:border-black">
-              <TableRow className="hover:bg-blue-700 print:hover:bg-transparent border-b-0">
-                <TableHead className="text-white print:text-black font-bold">
+            <TableHeader className="bg-transparent print:border-b-2 print:border-black">
+              <TableRow className="hover:bg-transparent border-b border-[#eceff4]">
+                <TableHead className="text-[#94a3b8] text-xs uppercase font-semibold tracking-wider h-10 px-4">
                   {type === 'meeting'
                     ? 'Reunião como convidada no tema AEGEA/CORSAN'
                     : 'Audiência / Cidade-sede'}
                 </TableHead>
-                <TableHead className="w-[180px] text-white print:text-black font-bold">
+                <TableHead className="w-[180px] text-[#94a3b8] text-xs uppercase font-semibold tracking-wider h-10 px-4">
                   {type === 'meeting' ? 'Data da reunião' : 'Data da audiência'}
                 </TableHead>
-                <TableHead className="w-[140px] text-white print:text-black font-bold">
+                <TableHead className="w-[140px] text-[#94a3b8] text-xs uppercase font-semibold tracking-wider h-10 px-4">
                   Status
                 </TableHead>
-                <TableHead className="w-[60px] text-right print:hidden"></TableHead>
+                <TableHead className="w-[60px] text-right print:hidden h-10 px-4"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -114,13 +95,10 @@ export function HearingTable({
                 return (
                   <TableRow
                     key={h.id}
-                    className={cn(
-                      'group transition-colors print:border-b print:border-slate-300',
-                      'even:bg-slate-50',
-                      `border-l-[3px] ${theme.rowBorder}`,
-                    )}
+                    className="group transition-colors border-b border-[#f4f6fa] border-l-[3px] last:border-b-0 hover:bg-slate-50 print:border-b print:border-slate-300"
+                    style={{ borderLeftColor: themeColor }}
                   >
-                    <TableCell className="py-1 border-r border-slate-200/50 print:border-slate-300 print:py-2">
+                    <TableCell className="py-3 px-4 border-r-0 print:py-2">
                       <div className="print:hidden">
                         <InlineInput
                           value={h.local}
@@ -128,9 +106,9 @@ export function HearingTable({
                           placeholder="Digite o local/tema"
                         />
                       </div>
-                      <div className="hidden print:block px-2">{h.local || '-'}</div>
+                      <div className="hidden print:block">{h.local || '-'}</div>
                     </TableCell>
-                    <TableCell className="py-1 border-r border-slate-200/50 print:border-slate-300 print:py-2">
+                    <TableCell className="py-3 px-4 border-r-0 print:py-2">
                       <div className="print:hidden">
                         <InlineInput
                           type="date"
@@ -138,9 +116,9 @@ export function HearingTable({
                           onChange={(v) => onUpdate(h.id, { date: fromInputDate(v) })}
                         />
                       </div>
-                      <div className="hidden print:block px-2 text-sm">{formatDateBr(h.date)}</div>
+                      <div className="hidden print:block text-sm">{formatDateBr(h.date)}</div>
                     </TableCell>
-                    <TableCell className="py-1 print:py-2 print:border-r print:border-slate-300">
+                    <TableCell className="py-3 px-4 print:py-2">
                       <Badge
                         variant="outline"
                         className={cn(
@@ -151,7 +129,7 @@ export function HearingTable({
                         {status}
                       </Badge>
                     </TableCell>
-                    <TableCell className="py-1 text-right print:hidden">
+                    <TableCell className="py-3 px-4 text-right print:hidden">
                       <Button
                         variant="ghost"
                         size="icon"
@@ -166,7 +144,7 @@ export function HearingTable({
               })}
               {data.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={4} className="text-center py-6 text-slate-500">
+                  <TableCell colSpan={4} className="text-center py-8 text-slate-500">
                     Nenhum registro encontrado.
                   </TableCell>
                 </TableRow>
@@ -174,12 +152,12 @@ export function HearingTable({
             </TableBody>
           </Table>
         </div>
-        <div className="p-2 border-t border-slate-100 bg-slate-50 print:hidden">
+        <div className="p-3 border-t border-[#eceff4] bg-white print:hidden">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => onAdd(type)}
-            className="text-blue-700 hover:text-blue-800 hover:bg-blue-700/10"
+            className="text-[#0e7490] hover:text-[#0e7490]/80 hover:bg-[#0e7490]/10"
           >
             <Plus className="h-4 w-4 mr-1" /> Adicionar Linha
           </Button>
