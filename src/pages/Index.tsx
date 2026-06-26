@@ -29,7 +29,7 @@ export default function Index() {
   const handleAdd = async (type: HearingType) => {
     await createHearing({
       type,
-      num: '',
+      num: Date.now().toString(),
       local: '',
       date: '',
     })
@@ -45,9 +45,17 @@ export default function Index() {
     }
   }
 
-  const thematic = hearings.filter((h) => h.type === 'thematic')
-  const territorial = hearings.filter((h) => h.type === 'territorial')
-  const meetings = hearings.filter((h) => h.type === 'meeting')
+  const sortHearings = (arr: Hearing[]) =>
+    arr.sort((a, b) => {
+      if (!a.date && !b.date) return 0
+      if (!a.date) return 1
+      if (!b.date) return -1
+      return new Date(a.date).getTime() - new Date(b.date).getTime()
+    })
+
+  const thematic = sortHearings(hearings.filter((h) => h.type === 'thematic'))
+  const territorial = sortHearings(hearings.filter((h) => h.type === 'territorial'))
+  const meetings = sortHearings(hearings.filter((h) => h.type === 'meeting'))
 
   return (
     <div className="p-6 md:p-8 max-w-[1400px] mx-auto w-full space-y-6 flex-1 flex flex-col h-full animate-in fade-in duration-500 print:p-0 print:space-y-4 print:max-w-none">

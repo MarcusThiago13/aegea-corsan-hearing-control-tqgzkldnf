@@ -36,7 +36,7 @@ export function ReportModal({ open, onOpenChange, hearings }: Props) {
       else if (status === 'A definir') emoji = '🟣'
 
       const dateStr = status === 'Agendada' ? `: ${formatDateBr(h.date)}` : ''
-      return `${emoji} ${h.num || '-'} - ${h.local || 'Sem local'} (${status}${dateStr})`
+      return `${emoji} ${h.local || 'Sem local'} (${status}${dateStr})`
     }
 
     const stats = hearings.reduce(
@@ -47,7 +47,7 @@ export function ReportModal({ open, onOpenChange, hearings }: Props) {
       {} as Record<string, number>,
     )
 
-    return `*RELATÓRIO DA COMISSÃO AEGEA/CORSAN*
+    return `*COMISSÃO ESPECIAL DE FISCALIZAÇÃO DA AEGEA/CORSAN*
 
 *Audiências Temáticas:*
 ${thematic.map(formatLine).join('\n') || 'Nenhuma registrada.'}

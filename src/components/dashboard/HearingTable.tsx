@@ -64,10 +64,6 @@ export function HearingTable({ title, type, data, onAdd, onUpdate, onDelete }: P
           <Table>
             <TableHeader className="bg-[#1e5631] print:bg-transparent print:border-b-2 print:border-black">
               <TableRow className="hover:bg-[#1e5631] print:hover:bg-transparent">
-                <TableHead className="w-[60px] text-white print:text-black font-bold">#</TableHead>
-                <TableHead className="w-[120px] text-white print:text-black font-bold">
-                  Tipo
-                </TableHead>
                 <TableHead className="text-white print:text-black font-bold">
                   {type === 'meeting'
                     ? 'Reunião como convidada no tema AEGEA/CORSAN'
@@ -95,25 +91,6 @@ export function HearingTable({ title, type, data, onAdd, onUpdate, onDelete }: P
                         : '',
                     )}
                   >
-                    <TableCell className="py-1 border-r border-slate-200/50 print:border-slate-300 print:py-2">
-                      <div className="print:hidden">
-                        <InlineInput
-                          value={h.num}
-                          onChange={(v) => onUpdate(h.id, { num: v })}
-                          placeholder="01"
-                        />
-                      </div>
-                      <div className="hidden print:block px-2">{h.num || '-'}</div>
-                    </TableCell>
-                    <TableCell className="py-1 border-r border-slate-200/50 print:border-slate-300 print:py-2">
-                      <span className="px-2 text-sm text-slate-700 print:text-black">
-                        {type === 'thematic'
-                          ? 'Temática'
-                          : type === 'territorial'
-                            ? 'Territorial'
-                            : 'Reunião'}
-                      </span>
-                    </TableCell>
                     <TableCell className="py-1 border-r border-slate-200/50 print:border-slate-300 print:py-2">
                       <div className="print:hidden">
                         <InlineInput
@@ -160,7 +137,7 @@ export function HearingTable({ title, type, data, onAdd, onUpdate, onDelete }: P
               })}
               {data.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-6 text-slate-500">
+                  <TableCell colSpan={4} className="text-center py-6 text-slate-500">
                     Nenhum registro encontrado.
                   </TableCell>
                 </TableRow>

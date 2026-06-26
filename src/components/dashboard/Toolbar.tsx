@@ -37,7 +37,7 @@ export function Toolbar({ hearings, onReload }: { hearings: Hearing[]; onReload:
         }
         for (const item of data) {
           await createHearing({
-            num: item.num,
+            num: item.num || Date.now().toString(),
             local: item.local,
             date: item.date,
             type: item.type,
