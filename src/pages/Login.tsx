@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 import { useAuth } from '@/hooks/use-auth'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -15,7 +15,7 @@ export default function Login() {
   const { signIn } = useAuth()
   const navigate = useNavigate()
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setErrorMsg('')
@@ -49,7 +49,7 @@ export default function Login() {
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Nome de usuário ou email"
+                placeholder="Nome de usuário"
                 className={errorMsg ? 'border-red-500 focus-visible:ring-red-500' : ''}
               />
             </div>
