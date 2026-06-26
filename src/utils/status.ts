@@ -6,7 +6,8 @@ export function getStatus(dateStr: string | undefined, type: HearingType): Statu
   if (!dateStr) return type === 'meeting' ? 'A definir' : 'A agendar'
   const today = new Date()
   today.setHours(0, 0, 0, 0)
-  const d = new Date(dateStr)
+  const d = new Date(dateStr.replace(' ', 'T'))
+  if (isNaN(d.getTime())) return type === 'meeting' ? 'A definir' : 'A agendar'
   d.setHours(0, 0, 0, 0)
   return d < today ? 'Realizada' : 'Agendada'
 }

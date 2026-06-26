@@ -33,9 +33,15 @@ function InlineInput({
       type={type}
       value={val}
       placeholder={placeholder}
-      onChange={(e) => setVal(e.target.value)}
+      onChange={(e) => {
+        const newValue = e.target.value
+        setVal(newValue)
+        if (type === 'date' && newValue !== value) {
+          onChange(newValue)
+        }
+      }}
       onBlur={() => {
-        if (val !== value) onChange(val)
+        if (type !== 'date' && val !== value) onChange(val)
       }}
       className="h-8 border-transparent hover:border-input focus:border-input bg-transparent px-2"
     />
