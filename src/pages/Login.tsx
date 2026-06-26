@@ -70,7 +70,7 @@ export default function Login() {
               className="w-full bg-[#1e5631] hover:bg-[#143d22]"
               disabled={loading}
             >
-              {loading ? 'Autenticando...' : 'Entrar no Sistema'}
+              {loading ? 'Autenticando...' : 'Entrar'}
             </Button>
           </form>
         </CardContent>
