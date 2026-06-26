@@ -50,22 +50,20 @@ export default function Index() {
   const meetings = hearings.filter((h) => h.type === 'meeting')
 
   return (
-    <div className="p-6 md:p-8 max-w-[1400px] mx-auto w-full space-y-8 flex-1 flex flex-col h-full animate-in fade-in duration-500 print:p-0 print:space-y-4">
-      <div className="flex flex-col gap-2 print:text-center print:mb-6">
-        <div className="text-sm font-semibold text-slate-500 uppercase tracking-wider print:text-slate-800">
+    <div className="p-6 md:p-8 max-w-[1400px] mx-auto w-full space-y-6 flex-1 flex flex-col h-full animate-in fade-in duration-500 print:p-0 print:space-y-4 print:max-w-none">
+      <div className="flex flex-col gap-1 print:text-center print:mb-4 bg-[#1e5631] text-white p-5 md:p-6 rounded-xl shadow-sm print:bg-transparent print:text-black print:p-0 print:shadow-none print:border-b print:border-slate-300 print:pb-4">
+        <div className="text-sm font-semibold text-green-100 uppercase tracking-wider print:text-slate-500">
           Assembleia Legislativa do RS
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 print:text-2xl">
-          Comissão Especial de Fiscalização da AEGEA/CORSAN
+        <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white print:text-black uppercase">
+          Comissão Especial de Fiscalização da AEGEA/CORSAN — Quadro de controle das audiências
+          públicas e reuniões
         </h1>
-        <p className="text-slate-500 text-lg print:text-base print:text-slate-700">
-          Quadro de controle das audiências públicas e reuniões
-        </p>
       </div>
 
       <StatsCards hearings={hearings} />
 
-      <div className="flex flex-col flex-1 space-y-6 bg-white p-6 rounded-xl border border-slate-200 shadow-sm print:border-none print:shadow-none print:p-0">
+      <div className="flex flex-col flex-1 space-y-6 bg-white p-6 rounded-xl border border-slate-200 shadow-sm print:border-none print:shadow-none print:p-0 print:space-y-4">
         <Toolbar hearings={hearings} onReload={loadData} />
         <HearingTable
           title="Audiências Temáticas"
