@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-26T01:12:14.046Z",
+  "generatedAt": "2026-06-26T01:16:08.614Z",
   "collections": [
     {
       "name": "users",
@@ -48,11 +48,11 @@
       "name": "hearings",
       "type": "base",
       "apiRules": {
-        "list": "@request.auth.id != ''",
-        "view": "@request.auth.id != ''",
-        "create": "@request.auth.id != ''",
-        "update": "@request.auth.id != ''",
-        "delete": "@request.auth.id != ''"
+        "list": "",
+        "view": "",
+        "create": "",
+        "update": "",
+        "delete": ""
       },
       "fields": [
         {

@@ -4,9 +4,6 @@ import { Hearing } from '@/types/hearing'
 import { StatsCards } from '@/components/dashboard/StatsCards'
 import { Toolbar } from '@/components/dashboard/Toolbar'
 import { HearingTable } from '@/components/dashboard/HearingTable'
-import { useAuth } from '@/hooks/use-auth'
-import { Button } from '@/components/ui/button'
-import { LogOut } from 'lucide-react'
 import { useRealtime } from '@/hooks/use-realtime'
 
 export default function Index() {
@@ -15,7 +12,6 @@ export default function Index() {
   const [search, setSearch] = useState('')
   const [typeFilter, setTypeFilter] = useState('all')
   const [statusFilter, setStatusFilter] = useState('all')
-  const { signOut } = useAuth()
 
   const loadData = async () => {
     try {
@@ -57,14 +53,6 @@ export default function Index() {
           <h2 className="text-3xl font-bold tracking-tight text-[#1e5631]">Painel de Audiências</h2>
           <p className="text-muted-foreground">Comissão Especial de Fiscalização AEGEA/CORSAN</p>
         </div>
-        <Button
-          variant="outline"
-          onClick={signOut}
-          className="text-red-600 hover:text-red-700 hover:bg-red-50"
-        >
-          <LogOut className="mr-2 h-4 w-4" />
-          Sair
-        </Button>
       </div>
 
       <StatsCards hearings={filteredHearings} />
