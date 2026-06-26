@@ -12,7 +12,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Trash2, Plus } from 'lucide-react'
+import { Trash2, Plus, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 function InlineInput({
@@ -28,6 +28,41 @@ function InlineInput({
 }) {
   const [val, setVal] = useState(value)
   useEffect(() => setVal(value), [value])
+
+  if (type === 'date') {
+    return (
+      <div className="flex items-center gap-1">
+        <Input
+          type="date"
+          value={val}
+          onChange={(e) => {
+            const newValue = e.target.value
+            setVal(newValue)
+            if (newValue !== value) {
+              onChange(newValue)
+            }
+          }}
+          className="h-8 flex-1 min-w-0 border border-[#e2e8f0] bg-white rounded-md px-2 py-1.5 text-[14px]"
+        />
+        {value && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => {
+              setVal('')
+              onChange('')
+            }}
+            className="h-8 w-8 text-slate-400 hover:text-red-600 flex-shrink-0"
+            title="Limpar data"
+            type="button"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        )}
+      </div>
+    )
+  }
+
   return (
     <Input
       type={type}
@@ -36,12 +71,9 @@ function InlineInput({
       onChange={(e) => {
         const newValue = e.target.value
         setVal(newValue)
-        if (type === 'date' && newValue !== value) {
-          onChange(newValue)
-        }
       }}
       onBlur={() => {
-        if (type !== 'date' && val !== value) onChange(val)
+        if (val !== value) onChange(val)
       }}
       className="h-8 border-transparent hover:border-input focus:border-input bg-transparent px-2"
     />
@@ -90,7 +122,7 @@ export function HearingTable({
                       ? 'Unidade / Local da visita'
                       : 'Audiência / Cidade-sede'}
                 </TableHead>
-                <TableHead className="w-[180px] text-[#94a3b8] text-xs uppercase font-semibold tracking-wider h-10 px-4">
+                <TableHead className="w-[220px] text-[#94a3b8] text-xs uppercase font-semibold tracking-wider h-10 px-4">
                   {type === 'meeting'
                     ? 'Data da reunião'
                     : type === 'visit'
@@ -208,7 +240,7 @@ export function HearingTable({
                     <div className="text-[11px] uppercase tracking-wide text-[#94a3b8] font-semibold mb-1">
                       Data
                     </div>
-                    <div className="-ml-2">
+                    <div>
                       <InlineInput
                         type="date"
                         value={toInputDate(h.date)}
