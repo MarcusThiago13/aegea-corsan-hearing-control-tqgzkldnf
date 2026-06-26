@@ -5,9 +5,11 @@ import { useRealtime } from '@/hooks/use-realtime'
 import { StatsCards } from '@/components/dashboard/StatsCards'
 import { Toolbar } from '@/components/dashboard/Toolbar'
 import { HearingTable } from '@/components/dashboard/HearingTable'
+import { useToast } from '@/hooks/use-toast'
 
 export default function Index() {
   const [hearings, setHearings] = useState<Hearing[]>([])
+  const { toast } = useToast()
 
   const loadData = async () => {
     try {
@@ -27,21 +29,36 @@ export default function Index() {
   })
 
   const handleAdd = async (type: HearingType) => {
-    await createHearing({
-      type,
-      num: Date.now().toString(),
-      local: '',
-      date: '',
-    })
+    try {
+      await createHearing({
+        type,
+        num: Date.now().toString(),
+        local: '',
+        date: '',
+      })
+      toast({ title: 'Sucesso', description: 'Registro adicionado automaticamente.', duration: 2000 })
+    } catch (error) {
+      toast({ title: 'Erro', description: 'Falha ao adicionar o registro.', variant: 'destructive' })
+    }
   }
 
   const handleUpdate = async (id: string, data: Partial<Hearing>) => {
-    await updateHearing(id, data)
+    try {
+      await updateHearing(id, data)
+      toast({ title: 'Salvo', description: 'Alteração salva automaticamente.', duration: 2000 })
+    } catch (error) {
+      toast({ title: 'Erro', description: 'Falha ao salvar a alteração.', variant: 'destructive' })
+    }
   }
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Tem certeza que deseja remover este registro?')) {
-      await deleteHearing(id)
+      try {
+        await deleteHearing(id)
+        toast({ title: 'Sucesso', description: 'Registro removido com sucesso.', duration: 2000 })
+      } catch (error) {
+        toast({ title: 'Erro', description: 'Falha ao remover o registro.', variant: 'destructive' })
+      }
     }
   }
 
@@ -60,13 +77,13 @@ export default function Index() {
   return (
     <div className="p-6 md:p-8 max-w-[1400px] mx-auto w-full space-y-6 flex-1 flex flex-col h-full animate-in fade-in duration-500 print:p-0 print:space-y-4 print:max-w-none">
       <div className="flex flex-col gap-1 print:text-center print:mb-4 bg-[#1e5631] text-white p-5 md:p-6 rounded-xl shadow-sm print:bg-transparent print:text-black print:p-0 print:shadow-none print:border-b print:border-slate-300 print:pb-4">
-        <div className="text-sm font-semibold text-green-100 uppercase tracking-wider print:text-slate-500">
-          Gabinete da Deputada Estadual Stela Farias - AL/RS
-        </div>
         <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white print:text-black uppercase">
+          Gabinete da Deputada Estadual Stela Farias - AL/RS
+        </h1>
+        <div className="text-sm font-semibold text-green-100 uppercase tracking-wider print:text-slate-500 mt-1">
           Comissão Especial de Fiscalização da AEGEA/CORSAN — Quadro de controle das audiências
           públicas e reuniões
-        </h1>
+        </div>
       </div>
 
       <StatsCards hearings={hearings} />
