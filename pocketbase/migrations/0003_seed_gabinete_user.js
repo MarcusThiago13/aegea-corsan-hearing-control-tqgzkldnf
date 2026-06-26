@@ -10,7 +10,9 @@ migrate(
 
     const record = new Record(users)
     record.set('username', 'GabineteStela')
+    record.setEmail('gabinete.stela@example.com')
     record.setPassword('Stela2026')
+    record.setVerified(true)
     record.set('name', 'Gabinete Stela')
     app.save(record)
   },
