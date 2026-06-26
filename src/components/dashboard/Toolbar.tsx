@@ -57,7 +57,7 @@ export function Toolbar({ hearings, onReload }: { hearings: Hearing[]; onReload:
     <div className="flex flex-wrap items-center gap-2 mb-6 p-3 bg-white rounded-lg border border-slate-200 shadow-sm print:hidden">
       <Button
         variant="default"
-        className="bg-[#1e5631] hover:bg-[#143d22]"
+        className="bg-[#0e7490] hover:bg-[#0b5a73] text-white"
         onClick={() => setReportOpen(true)}
       >
         <MessageSquare className="w-4 h-4 mr-2" /> Texto p/ WhatsApp
