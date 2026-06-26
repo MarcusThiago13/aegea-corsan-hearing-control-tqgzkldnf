@@ -84,6 +84,7 @@ export default function Index() {
 
   const thematic = sortHearings(hearings.filter((h) => h.type === 'thematic'))
   const territorial = sortHearings(hearings.filter((h) => h.type === 'territorial'))
+  const visits = sortHearings(hearings.filter((h) => h.type === 'visit'))
   const meetings = sortHearings(hearings.filter((h) => h.type === 'meeting'))
 
   return (
@@ -121,6 +122,15 @@ export default function Index() {
           type="territorial"
           themeColor="#0284c7"
           data={territorial}
+          onAdd={handleAdd}
+          onUpdate={handleUpdate}
+          onDelete={handleDelete}
+        />
+        <HearingTable
+          title="Visitas Técnicas"
+          type="visit"
+          themeColor="#4f46e5"
+          data={visits}
           onAdd={handleAdd}
           onUpdate={handleUpdate}
           onDelete={handleDelete}

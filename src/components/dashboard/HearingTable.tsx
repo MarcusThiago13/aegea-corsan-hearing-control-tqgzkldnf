@@ -78,10 +78,16 @@ export function HearingTable({
                 <TableHead className="text-[#94a3b8] text-xs uppercase font-semibold tracking-wider h-10 px-4">
                   {type === 'meeting'
                     ? 'Reunião como convidada no tema AEGEA/CORSAN'
-                    : 'Audiência / Cidade-sede'}
+                    : type === 'visit'
+                      ? 'Unidade / Local da visita'
+                      : 'Audiência / Cidade-sede'}
                 </TableHead>
                 <TableHead className="w-[180px] text-[#94a3b8] text-xs uppercase font-semibold tracking-wider h-10 px-4">
-                  {type === 'meeting' ? 'Data da reunião' : 'Data da audiência'}
+                  {type === 'meeting'
+                    ? 'Data da reunião'
+                    : type === 'visit'
+                      ? 'Data da visita'
+                      : 'Data da audiência'}
                 </TableHead>
                 <TableHead className="w-[140px] text-[#94a3b8] text-xs uppercase font-semibold tracking-wider h-10 px-4">
                   Status

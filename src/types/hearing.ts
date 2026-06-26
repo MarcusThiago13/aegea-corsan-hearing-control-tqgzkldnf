@@ -1,4 +1,4 @@
-export type HearingType = 'thematic' | 'territorial' | 'meeting'
+export type HearingType = 'thematic' | 'territorial' | 'visit' | 'meeting'
 
 export interface Hearing {
   id: string

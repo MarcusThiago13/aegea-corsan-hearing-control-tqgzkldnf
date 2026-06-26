@@ -26,6 +26,7 @@ export function ReportModal({ open, onOpenChange, hearings }: Props) {
   const reportText = useMemo(() => {
     const thematic = hearings.filter((h) => h.type === 'thematic')
     const territorial = hearings.filter((h) => h.type === 'territorial')
+    const visits = hearings.filter((h) => h.type === 'visit')
     const meetings = hearings.filter((h) => h.type === 'meeting')
 
     const formatLine = (h: Hearing) => {
@@ -54,6 +55,9 @@ ${thematic.map(formatLine).join('\n') || 'Nenhuma registrada.'}
 
 *Audiências Territoriais:*
 ${territorial.map(formatLine).join('\n') || 'Nenhuma registrada.'}
+
+*Visitas Técnicas:*
+${visits.map(formatLine).join('\n') || 'Nenhuma registrada.'}
 
 *Reuniões:*
 ${meetings.map(formatLine).join('\n') || 'Nenhuma registrada.'}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-26T02:20:55.861Z",
+  "generatedAt": "2026-06-26T02:35:01.809Z",
   "collections": [
     {
       "name": "users",
@@ -78,7 +78,7 @@
           "type": "select",
           "required": true,
           "system": false,
-          "selectValues": ["thematic", "territorial", "meeting"]
+          "selectValues": ["thematic", "territorial", "meeting", "visit"]
         },
         {
           "name": "created",
