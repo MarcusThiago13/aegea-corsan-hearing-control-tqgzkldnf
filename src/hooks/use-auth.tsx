@@ -4,7 +4,7 @@ import pb from '@/lib/pocketbase/client'
 interface AuthContextType {
   user: any
   isAuthenticated: boolean
-  signIn: (email: string, password: string) => Promise<{ error: any }>
+  signIn: (identifier: string, password: string) => Promise<{ error: any }>
   signOut: () => void
   loading: boolean
 }
@@ -41,9 +41,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [])
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (identifier: string, password: string) => {
     try {
-      await pb.collection('users').authWithPassword(email, password)
+      await pb.collection('users').authWithPassword(identifier, password)
       return { error: null }
     } catch (error) {
       return { error }

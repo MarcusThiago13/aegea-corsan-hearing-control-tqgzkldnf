@@ -1,40 +1,29 @@
 import { useState } from 'react'
 import { useAuth } from '@/hooks/use-auth'
 import { useNavigate } from 'react-router-dom'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { ShieldCheck } from 'lucide-react'
-import { useToast } from '@/hooks/use-toast'
 
 export default function Login() {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
   const { signIn } = useAuth()
   const navigate = useNavigate()
-  const { toast } = useToast()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    const { error } = await signIn(email, password)
+    setErrorMsg('')
+    const { error } = await signIn(username, password)
     setLoading(false)
 
     if (error) {
-      toast({
-        title: 'Acesso negado',
-        description: 'Credenciais inválidas.',
-        variant: 'destructive',
-      })
+      setErrorMsg('Usuário(a) ou senha incorretos.')
     } else {
       navigate('/')
     }
@@ -53,14 +42,15 @@ export default function Login() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Usuário(a)</Label>
+              <Label htmlFor="username">Usuário(a)</Label>
               <Input
-                id="email"
-                type="email"
+                id="username"
+                type="text"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="usuario@exemplo.com"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Nome de usuário ou email"
+                className={errorMsg ? 'border-red-500 focus-visible:ring-red-500' : ''}
               />
             </div>
             <div className="space-y-2">
@@ -71,8 +61,10 @@ export default function Login() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className={errorMsg ? 'border-red-500 focus-visible:ring-red-500' : ''}
               />
             </div>
+            {errorMsg && <p className="text-sm text-red-500 font-medium">{errorMsg}</p>}
             <Button
               type="submit"
               className="w-full bg-[#1e5631] hover:bg-[#143d22]"
@@ -82,9 +74,6 @@ export default function Login() {
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="justify-center">
-          <p className="text-xs text-slate-500">Uso exclusivo de membros da comissão.</p>
-        </CardFooter>
       </Card>
     </div>
   )
