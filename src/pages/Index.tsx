@@ -61,7 +61,7 @@ export default function Index() {
     <div className="p-6 md:p-8 max-w-[1400px] mx-auto w-full space-y-6 flex-1 flex flex-col h-full animate-in fade-in duration-500 print:p-0 print:space-y-4 print:max-w-none">
       <div className="flex flex-col gap-1 print:text-center print:mb-4 bg-[#1e5631] text-white p-5 md:p-6 rounded-xl shadow-sm print:bg-transparent print:text-black print:p-0 print:shadow-none print:border-b print:border-slate-300 print:pb-4">
         <div className="text-sm font-semibold text-green-100 uppercase tracking-wider print:text-slate-500">
-          Assembleia Legislativa do RS
+          Gabinete da Deputada Estadual Stela Farias - AL/RS
         </div>
         <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white print:text-black uppercase">
           Comissão Especial de Fiscalização da AEGEA/CORSAN — Quadro de controle das audiências
