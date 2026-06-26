@@ -11,6 +11,8 @@ export function Toolbar({ hearings, onReload }: { hearings: Hearing[]; onReload:
   const fileInputRef = useRef<HTMLInputElement>(null)
   const { toast } = useToast()
 
+  const isAdmin = new URLSearchParams(window.location.search).get('admin') === '1'
+
   const handlePrint = () => window.print()
 
   const handleExport = () => {
@@ -66,24 +68,28 @@ export function Toolbar({ hearings, onReload }: { hearings: Hearing[]; onReload:
         <Printer className="w-4 h-4 mr-2" /> PDF / Imprimir
       </Button>
       <div className="flex-1" />
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => fileInputRef.current?.click()}
-        className="text-slate-600"
-      >
-        <Upload className="w-4 h-4 mr-2" /> Importar arquivo
-      </Button>
-      <Button variant="ghost" size="sm" onClick={handleExport} className="text-slate-600">
-        <Download className="w-4 h-4 mr-2" /> Backup em arquivo
-      </Button>
-      <input
-        type="file"
-        accept=".json"
-        className="hidden"
-        ref={fileInputRef}
-        onChange={handleImport}
-      />
+      {isAdmin && (
+        <>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => fileInputRef.current?.click()}
+            className="text-slate-600"
+          >
+            <Upload className="w-4 h-4 mr-2" /> Importar arquivo
+          </Button>
+          <Button variant="ghost" size="sm" onClick={handleExport} className="text-slate-600">
+            <Download className="w-4 h-4 mr-2" /> Backup em arquivo
+          </Button>
+          <input
+            type="file"
+            accept=".json"
+            className="hidden"
+            ref={fileInputRef}
+            onChange={handleImport}
+          />
+        </>
+      )}
       <ReportModal open={reportOpen} onOpenChange={setReportOpen} hearings={hearings} />
     </div>
   )
